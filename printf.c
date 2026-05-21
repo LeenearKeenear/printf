@@ -404,11 +404,17 @@ static size_t _ftoa(out_fct_type out, char* buffer, size_t idx, size_t maxlen, d
     ++frac;
   }
 
+  // possible case 0.99 with prec 1 is 1.0
+  if(prec > 0U && frac >= pow10[prec]){
+    frac = 0;
+    ++whole;
+  }
+
   if (prec == 0U) {
     diff = value - (double)whole;
-    if ((!(diff < 0.5) || (diff > 0.5)) && (whole & 1)) {
-      // exactly 0.5 and ODD, then round up
-      // 1.5 -> 2, but 2.5 -> 2
+    if (diff > 0.5) {
+      ++whole;
+    } else if ((diff == 0.5) && (whole & 1)) {
       ++whole;
     }
   }
