@@ -843,6 +843,10 @@ static int _vsnprintf(out_fct_type out, char* buffer, const size_t maxlen, const
         break;
 
       default :
+        if (*format == '\0') {
+          // to prevent oob if the string ends suddenly
+          break;
+        }
         out(*format, buffer, idx++, maxlen);
         format++;
         break;
