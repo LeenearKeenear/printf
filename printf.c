@@ -46,9 +46,9 @@
 
 // 'ntoa' conversion buffer size, this must be big enough to hold one converted
 // numeric number including padded zeros (dynamically created on stack)
-// default: 32 byte
+// default: 32 byte (now supports 64 bit :> )
 #ifndef PRINTF_NTOA_BUFFER_SIZE
-#define PRINTF_NTOA_BUFFER_SIZE    32U
+#define PRINTF_NTOA_BUFFER_SIZE    64U
 #endif
 
 // 'ftoa' conversion buffer size, this must be big enough to hold one converted
